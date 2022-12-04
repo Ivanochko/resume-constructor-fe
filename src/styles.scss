@@ -1,8 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
+@import "src/app/shared/colors";
+
 html, body {
   background-color: antiquewhite;
   height: 100%;
   width: 100%;
   padding: 0;
   margin: 0;
+}
+
+.plain-button {
+  background-color: $medium-dark;
+  border: 1px solid $dark;
+  border-radius: 5px;
+  color: $light;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.5s ease-in;
+  font-size: 1.5vw;
+
+  &:disabled {
+    background-color: $light-medium;
+    cursor: not-allowed;
+    box-shadow: none !important;
+
+    &:hover {
+      background-color: $light-medium;
+    }
+  }
+
+  &:hover {
+    background-color: $medium;
+    box-shadow: 2px 2px 7px rgba(57, 57, 57, 0.68);
+  }
+}
+
+.text-button {
+  background: none;
+  color: $dark;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.5s ease-in;
+  font-size: 1vw;
+  text-decoration: underline;
+  border: none;
+
+  &:hover {
+    color: $medium;
+  }
+}
+
+div.cdk-global-overlay-wrapper {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  height: 90%;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

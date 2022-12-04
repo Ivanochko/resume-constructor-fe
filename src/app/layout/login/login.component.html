@@ -1,0 +1,61 @@
+<form class="login-form-wrapper" [formGroup]="form">
+
+  <div class="input-wrapper">
+    <label for="email">Email</label>
+    <input type="email" id="email" formControlName="email">
+  </div>
+
+  <div class="input-wrapper">
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password">
+  </div>
+
+  <div *ngIf="isRegister">
+    <div class="input-wrapper">
+      <label for="confirmPassword">Repeat password</label>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword">
+      <div class="validation-message" *ngIf="form.hasError('notSame')">
+        Passwords are not equals
+      </div>
+      <div class="validation-message" *ngIf="form.hasError('checkContainsUpperAndLowerLetters')">
+        Password must contain upper and lower letters
+      </div>
+      <div class="validation-message" *ngIf="form.hasError('checkContainsNumbers')">
+        Password must contain at least one number
+      </div>
+      <div class="validation-message" *ngIf="form.hasError('checkContainsSymbols')">
+        Password must contain at least one special symbol
+      </div>
+      <div class="validation-message" *ngIf="form.hasError('checkLength')">
+        Passwords must be at least 8 symbols length
+      </div>
+    </div>
+    <div class="input-wrapper">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" formControlName="firstName">
+    </div>
+    <div class="input-wrapper">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" formControlName="lastName">
+    </div>
+    <div class="input-wrapper recaptcha-wrapper">
+      <re-captcha id="recaptcha" name="recaptcha" formControlName="recaptcha" required
+                  [class.is-invalid]="form.get('recaptcha')!.invalid
+                    && (form.get('recaptcha')!.dirty || form.get('recaptcha')!.touched)"></re-captcha>
+      <div *ngIf="form.get('recaptcha')!.invalid && (form.get('recaptcha')!.dirty || form.get('recaptcha')!.touched)"
+           class="invalid-feedback">
+        <div *ngIf="form.get('recaptcha')!.errors?.['required']">This field is required.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons-wrapper">
+    <button class="plain-button" (click)="action()" [disabled]="form.invalid">
+      {{ isRegister ? 'Register' : 'Login!' }}
+    </button>
+    <button class="text-button" (click)="switchType()">
+      {{ isRegister ? 'Login' : 'Register new' }}
+    </button>
+  </div>
+</form>
+

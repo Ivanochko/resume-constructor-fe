@@ -107,5 +107,7 @@
       }
     }
   },
-  "defaultProject": "resume-constructor-fe"
+  "cli": {
+    "analytics": "8cdb2ccc-41dc-4b83-80ee-608ba2e4a56b"
+  }
 }

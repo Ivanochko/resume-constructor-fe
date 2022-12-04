@@ -14,8 +14,9 @@ div.home-wrapper {
     height: 95%;
     margin: 0 auto;
     display: grid;
+    grid-auto-flow: column dense;
     grid-gap: 30px;
-    grid-template-columns: repeat(5, 1fr);
+    //grid-template-columns: repeat(5, 1fr);
 
     div.grid-item {
       height: 100%;
@@ -78,6 +79,7 @@ div.home-wrapper {
 
         mat-icon {
           width: 50%;
+          height: 100%;
           font-size: 3.5vw;
         }
       }
