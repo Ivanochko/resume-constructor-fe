@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "src/app/shared/colors";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html, body {
   background-color: antiquewhite;
@@ -10,34 +11,33 @@ html, body {
 }
 
 .plain-button {
-  background-color: $medium-dark;
-  border: 1px solid $dark;
+  background-color: $primary;
+  border: 1px solid $primary-dark;
   border-radius: 5px;
-  color: $light;
+  color: $primary-50;
   padding: 6px 12px;
   cursor: pointer;
   transition: all 0.5s ease-in;
-  font-size: 1.5vw;
 
   &:disabled {
-    background-color: $light-medium;
+    background-color: $secondary;
     cursor: not-allowed;
     box-shadow: none !important;
 
     &:hover {
-      background-color: $light-medium;
+      background-color: $secondary;
     }
   }
 
   &:hover {
-    background-color: $medium;
+    background-color: $primary;
     box-shadow: 2px 2px 7px rgba(57, 57, 57, 0.68);
   }
 }
 
 .text-button {
   background: none;
-  color: $dark;
+  color: $primary-dark;
   padding: 6px 12px;
   cursor: pointer;
   transition: all 0.5s ease-in;
@@ -46,7 +46,7 @@ html, body {
   border: none;
 
   &:hover {
-    color: $medium;
+    color: $primary;
   }
 }
 
@@ -60,4 +60,63 @@ div.cdk-global-overlay-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+div.buttons-container {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    margin: 5px;
+  }
+}
+
+.mat-stepper-horizontal {
+  height: 100% !important;
+}
+
+.mat-horizontal-stepper-wrapper,
+.mat-horizontal-content-container {
+  height: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+.mat-horizontal-content-container {
+  overflow: auto !important;
+}
+
+.mat-datepicker-input {
+  width: 80% !important;
+}
+
+.date-work-form-field {
+
+  .mat-form-field-wrapper {
+    .mat-form-field-flex {
+      height: 100%;
+      align-items: center;
+
+      .mat-form-field-infix {
+        padding: 0 0 1em 0 !important;
+        height: 24px !important;
+
+        .mat-input-element {
+          vertical-align: unset !important;
+        }
+      }
+    }
+  }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: $secondary-dark !important;
+}
+
+.mat-input-element {
+  font: 1em Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+div.mat-form-field-infix {
+  padding: 12px 0 !important;
 }

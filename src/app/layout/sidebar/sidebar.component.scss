@@ -3,7 +3,7 @@
 div.sidebar-wrapper {
   width: 100%;
   height: calc(100% - 20px);
-  background-color: $dark;
+  background-color: $primary;
   padding: 10px 0 10px 0;
 
   a.logo-wrapper {
@@ -40,7 +40,7 @@ div.sidebar-wrapper {
       }
 
       &:hover {
-        background-color: $dark-plus;
+        background-color: $primary-dark;
       }
 
       div.element-title {

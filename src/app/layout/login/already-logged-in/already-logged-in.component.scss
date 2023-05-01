@@ -10,7 +10,7 @@ div.logged-in-wrapper {
 
   span {
     font-family: Consolas, monaco, monospace;
-    color: $dark;
+    color: $primary-dark;
     font-weight: bolder;
     font-size: 2vw;
   }
@@ -22,7 +22,6 @@ div.logged-in-wrapper {
 
     button {
       margin: 10px;
-      font-size: 1.5vw;
     }
   }
 }

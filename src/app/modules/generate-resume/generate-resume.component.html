@@ -1,0 +1,90 @@
+<div class="content-container">
+  <div class="content-header">
+    <div class="header-title">
+      Generate resume
+    </div>
+    <div class="buttons-container">
+      <button mat-raised-button color="primary" (click)="refreshData()">
+        Refresh data
+      </button>
+      <button mat-raised-button color="primary" (click)="download()">
+        Download CV
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="cv-container" id="cv-container" *ngIf="userAllData">
+
+  <div class="cv-left-part">
+    <div class="cv-section">
+      <div class="name">{{userAllData.firstName}} {{userAllData.lastName}}</div>
+      <div class="title"> {{userAllData.title}}</div>
+    </div>
+    <div class="summary cv-section">
+      <div class="cv-section-header">
+        Summary
+      </div>
+      <div class="cv-section-content">
+        {{userAllData.summary}}
+      </div>
+    </div>
+    <div class="education cv-section">
+      <div class="cv-section-header">
+        Contacts
+      </div>
+      <div class="cv-section-content">
+        <div class="contacts" *ngFor="let contact of userAllData.contacts">
+          <span class="contacts-label">{{ contact.label }}: </span>
+          <span class="contacts-value">{{ contact.value }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-right-part">
+    <div class="experience cv-section">
+      <div class="cv-section-header">
+        Experience
+      </div>
+      <div class="cv-section-content">
+        <div class="job" *ngFor="let work of userAllData.works">
+          <div class="job-title">
+            {{ work.jobTitle }}
+          </div>
+          <div class="job-company">
+            {{ work.company }}
+          </div>
+          <div class="job-dates">
+            {{ formatDateFromApi(work.startDate!) }} - {{ formatDateFromApi(work.endDate!) }}
+          </div>
+          <div class="job-dates">
+            {{ work.participation }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cv-section">
+      <div class="cv-section-header">
+        Education
+      </div>
+      <div class="cv-section-content">
+        <div class="education" *ngFor="let education of userAllData.educations">
+          <div class="education-title">
+            {{ education.title }}
+          </div>
+          <div class="education-place">
+            {{ education.placeOfGraduation }}
+          </div>
+          <div class="education-year">
+            {{ education.yearOfGraduation }}
+          </div>
+          <div class="education-degree">
+            {{ education.degree }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

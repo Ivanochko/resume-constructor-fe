@@ -1,0 +1,96 @@
+<div [formGroup]="formGroup" class="content-container">
+  <div class="content-header">
+    <div class="header-title">
+      Personal info
+    </div>
+    <div class="buttons-container">
+      <button mat-raised-button color="primary" (click)="save()" [disabled]="formGroup.invalid || !formGroup.dirty">
+        Save
+      </button>
+      <button mat-raised-button color="primary" (click)="nextStep()">Next</button>
+    </div>
+  </div>
+<!--  <div class="top-data">-->
+    <!--    <div class="photo">Your photo</div>-->
+    <!--    <div class="name-inputs-container">-->
+    <div class="other-subform">
+      <mat-form-field class="other-form-field" appearance="outline">
+        <mat-label>First name</mat-label>
+        <input matInput type="text" formControlName="firstName">
+        <mat-error>
+          The first name field is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="other-form-field" appearance="outline">
+        <mat-label>Last name</mat-label>
+        <input matInput type="text" formControlName="lastName">
+        <mat-error>
+          The last name field is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+<!--  </div>-->
+  <div class="other-subform">
+    <mat-form-field class="full-width-input" appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" formControlName="title" placeholder="Ex. Software Engineer">
+    </mat-form-field>
+  </div>
+  <div class="other-subform">
+    <mat-form-field class="other-form-field" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="text" formControlName="email" placeholder="Ex. pat@example.com">
+    </mat-form-field>
+    <mat-form-field class="other-form-field" appearance="outline">
+      <mat-label>Phone number</mat-label>
+      <input matInput type="text" formControlName="phoneNumber" placeholder="Ex. +38(000) 000 00 00">
+    </mat-form-field>
+  </div>
+  <div class="other-subform">
+    <mat-form-field class="other-form-field" appearance="outline">
+      <mat-label>Sex</mat-label>
+      <mat-select formControlName="sex">
+        <mat-option value="MALE">
+          Male
+        </mat-option>
+        <mat-option value="FEMALE">
+          Female
+        </mat-option>
+        <mat-option value="DIVERSE">
+          Diverse
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="other-form-field" appearance="outline">
+      <mat-label>Location</mat-label>
+      <input matInput type="text" formControlName="location" placeholder="Ex. Ivano-Frankivsk, Ukraine">
+    </mat-form-field>
+  </div>
+  <mat-form-field class="full-width-input" appearance="outline">
+    <mat-label>Summary</mat-label>
+    <textarea matInput formControlName="summary" rows="4"></textarea>
+    <mat-error *ngIf="formGroup.controls['summary'].hasError('maxLength')">
+      The length for summary must be less than 500.
+    </mat-error>
+  </mat-form-field>
+  <div>
+    <div class="contacts-label">Contacts</div>
+    <div formArrayName="contacts">
+      <div *ngFor="let contact of contactsFormArray.controls; let index = index" [formGroupName]="index"
+           class="contact-input">
+        <mat-form-field class="contact-form-field" appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="label" placeholder="Ex. LinkedIn, GitHub">
+        </mat-form-field>
+        <mat-form-field class="contact-form-field" appearance="outline">
+          <mat-label>Value</mat-label>
+          <input matInput type="text" formControlName="value" placeholder="Ex. https://example.com">
+        </mat-form-field>
+        <div class="delete-contact" (click)="deleteContact(index)">
+          <mat-icon>delete_outline</mat-icon>
+        </div>
+      </div>
+      <button class="text-button add-new-array-element" (click)="addNewContact()">Add new contact</button>
+    </div>
+  </div>
+</div>

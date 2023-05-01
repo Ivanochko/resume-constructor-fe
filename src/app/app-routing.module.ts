@@ -5,7 +5,6 @@ import {LoginComponent} from "./layout/login/login.component";
 import {LoginGuard} from "./shared/guards/login.guard";
 import {CanOpenLoginGuard} from "./shared/guards/can-open-login-guard.service";
 import {AlreadyLoggedInComponent} from "./layout/login/already-logged-in/already-logged-in.component";
-import {AboutMeComponent} from "./modules/about-me/about-me.component";
 
 const routes: Routes = [
   {
@@ -20,10 +19,6 @@ const routes: Routes = [
       {
         path: "home",
         component: HomeComponent
-      },
-      {
-        path: "about-me",
-        component: AboutMeComponent
       }
     ]
   },
