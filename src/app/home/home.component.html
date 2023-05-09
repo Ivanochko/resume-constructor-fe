@@ -1,0 +1,34 @@
+<mat-stepper #stepper  [@.disabled]="true">
+  <mat-step [stepControl]="aboutMeFormGroup">
+    <ng-template matStepLabel>About me</ng-template>
+    <app-about-me [formGroup]="aboutMeFormGroup"
+                  (next)="next()">
+    </app-about-me>
+  </mat-step>
+  <mat-step [stepControl]="aboutMeFormGroup">
+    <ng-template matStepLabel>Experience</ng-template>
+    <app-experience [formGroup]="experienceFormGroup"
+                    (previous)=previous()
+                    (next)="next()">
+    </app-experience>
+  </mat-step>
+  <mat-step [stepControl]="aboutMeFormGroup">
+    <ng-template matStepLabel>Education</ng-template>
+    <app-education [formGroup]="educationFormGroup"
+                   (previous)=previous()
+                   (next)="next()">
+    </app-education>
+  </mat-step>
+<!--  <mat-step [stepControl]="aboutMeFormGroup">-->
+<!--    <ng-template matStepLabel>Courses</ng-template>-->
+<!--    <app-cources></app-cources>-->
+<!--  </mat-step>-->
+<!--  <mat-step [stepControl]="aboutMeFormGroup">-->
+<!--    <ng-template matStepLabel>Certifications</ng-template>-->
+<!--    <app-certificates></app-certificates>-->
+<!--  </mat-step>-->
+  <mat-step [stepControl]="aboutMeFormGroup">
+    <ng-template matStepLabel>Generate resume</ng-template>
+    <app-generate-resume></app-generate-resume>
+  </mat-step>
+</mat-stepper>

@@ -1,0 +1,38 @@
+@import "src/app/shared/colors";
+
+form.login-form-wrapper {
+  background-image: url("../../../assets/images/background.png");
+  background-repeat: repeat;
+  //width: calc(100% - 20px);
+  //padding: 10px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $primary-dark;
+  font-weight: bolder;
+
+  .login-header{
+    font-family: Consolas, monaco, monospace;
+    color: $primary-dark;
+    font-size: 34px;
+    font-weight: 600;
+    margin: 5px 0;
+  }
+
+  .input-wrapper {
+    width: 410px !important;
+    min-width: 400px !important;
+    max-width: 400px !important;
+    margin: 5px;
+  }
+
+  div.recaptcha-wrapper{
+    text-align: center;
+
+    re-captcha {
+      width: 100%;
+    }
+  }
+}

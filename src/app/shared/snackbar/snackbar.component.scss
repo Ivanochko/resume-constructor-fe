@@ -1,0 +1,29 @@
+@import "src/app/shared/colors";
+
+:host {
+  position: absolute !important;
+  right: 0;
+  top: 0;
+  display: flex;
+  z-index: 10000;
+  background: $primary-dark;
+  color: $secondary-light;
+  padding: 10px;
+  max-width: 500px;
+  border-radius: 5px;
+  align-items: center;
+
+  span.actions {
+    height: 100% !important;
+
+    button {
+      height: 100% !important;
+      background-color: $primary;
+      color: $primary-50;
+    }
+  }
+
+  span.message {
+    padding: 5px;
+  }
+}

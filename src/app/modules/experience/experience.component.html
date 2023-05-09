@@ -1,0 +1,79 @@
+<div [formGroup]="formGroup" class="content-container">
+  <div class="content-header">
+    <div class="header-title">
+      Work experience
+    </div>
+    <div class="buttons-container">
+      <button mat-raised-button color="primary" (click)="save()" [disabled]="formGroup.invalid || !formGroup.dirty">Save</button>
+      <button mat-raised-button color="primary" (click)="previousStep()">Previous</button>
+      <button mat-raised-button color="primary" (click)="nextStep()">Next</button>
+    </div>
+  </div>
+  <div>
+    <div formArrayName="works">
+      <div *ngIf="worksFormArray.controls.length == 0">
+        There are no date about experience, please click the button below to add new information.
+      </div>
+      <div *ngFor="let work of worksFormArray.controls; let index = index" [formGroupName]="index"
+           class="work-form-array">
+        <div class="work-inputs-container">
+          <div>
+            <mat-form-field class="work-form-field" appearance="outline">
+              <mat-label>Job title</mat-label>
+              <input matInput type="text" formControlName="jobTitle">
+            </mat-form-field>
+
+            <mat-form-field class="work-form-field" appearance="outline">
+              <mat-label>Company</mat-label>
+              <input matInput type="text" formControlName="company">
+            </mat-form-field>
+          </div>
+
+          <div class="date-container">
+            <mat-form-field appearance="outline" class="date-work-form-field work-form-field">
+              <mat-label>Choose a start date</mat-label>
+              <input matInput [matDatepicker]="datePickerStartDate" formControlName="startDate">
+              <mat-datepicker-toggle matIconSuffix [for]="datePickerStartDate"></mat-datepicker-toggle>
+              <mat-datepicker #datePickerStartDate>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>Cancel</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="date-work-form-field work-form-field" appearance="outline">
+              <mat-label>Choose an end date</mat-label>
+              <input matInput [matDatepicker]="datePickerEndDate" formControlName="endDate">
+              <mat-datepicker-toggle matIconSuffix [for]="datePickerEndDate"></mat-datepicker-toggle>
+              <mat-datepicker #datePickerEndDate>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>Cancel</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+            </mat-form-field>
+          </div>
+          <mat-checkbox formControlName="isCurrent"
+                        color="primary"
+                        class="current-job-checkbox"
+                        (change)="onCurrentCheckboxChange(index)">
+            Current job
+          </mat-checkbox>
+          <div>
+            <mat-form-field class="full-width-input" appearance="outline">
+              <mat-label>Participation</mat-label>
+              <textarea matInput cdkTextareaAutosize formControlName="participation" rows="4"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="works-actions-container">
+          <div class="delete-work" (click)="deleteWork(index)">
+            <mat-icon>delete_outline</mat-icon>
+          </div>
+        </div>
+      </div>
+      <button class="text-button add-new-array-element" (click)="addNewWork()">Add new job information</button>
+    </div>
+  </div>
+</div>
+

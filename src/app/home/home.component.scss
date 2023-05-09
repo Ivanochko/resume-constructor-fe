@@ -1,0 +1,8 @@
+@import "src/app/shared/colors";
+
+:host {
+  color: $dark;
+  height: 100%;
+  width: 100%;
+  display: block;
+}

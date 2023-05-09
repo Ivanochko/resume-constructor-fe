@@ -1,0 +1,56 @@
+<form class="login-form-wrapper" [formGroup]="form">
+
+  <div class="login-header">
+    Resume Constructor
+  </div>
+
+  <mat-form-field class="input-wrapper" appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput type="text" formControlName="email">
+  </mat-form-field>
+
+  <mat-form-field class="input-wrapper" appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password">
+    <mat-error>
+      {{passwordErrorMessage}}
+    </mat-error>
+  </mat-form-field>
+
+  <ng-container *ngIf="isRegister">
+    <mat-form-field class="input-wrapper" appearance="outline">
+      <mat-label>Confirm password</mat-label>
+      <input matInput type="password" formControlName="confirmPassword">
+      <mat-error>
+        Passwords are not equals
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="input-wrapper" appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" formControlName="firstName">
+    </mat-form-field>
+    <mat-form-field class="input-wrapper" appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" formControlName="lastName">
+    </mat-form-field>
+    <div class="input-wrapper recaptcha-wrapper">
+      <re-captcha id="recaptcha" formControlName="recaptcha" required
+                  [class.is-invalid]="form.get('recaptcha')!.invalid
+                    && (form.get('recaptcha')!.dirty || form.get('recaptcha')!.touched)"></re-captcha>
+      <div *ngIf="form.get('recaptcha')!.invalid && (form.get('recaptcha')!.dirty || form.get('recaptcha')!.touched)"
+           class="invalid-feedback">
+        <div *ngIf="form.get('recaptcha')!.errors?.['required']">This field is required.</div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="buttons-wrapper">
+    <button mat-raised-button color="primary" (click)="action()" [disabled]="form.invalid || this.isRequestSend">
+      {{ isRegister ? 'Register' : 'Login!' }}
+    </button>
+    <button mat-button color="primary" (click)="switchType()" [disabled]="this.isRequestSend">
+      {{ isRegister ? 'Login' : 'Register new' }}
+    </button>
+  </div>
+</form>
+
