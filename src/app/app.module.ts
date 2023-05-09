@@ -23,7 +23,6 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {ExperienceComponent} from './modules/experience/experience.component';
 import {EducationComponent} from './modules/education/education.component';
 import {CourcesComponent} from './modules/cources/cources.component';
-import {CertificatesComponent} from './modules/certificates/certificates.component';
 import {GenerateResumeComponent} from './modules/generate-resume/generate-resume.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
@@ -46,7 +45,6 @@ import {DatePipe} from "@angular/common";
     ExperienceComponent,
     EducationComponent,
     CourcesComponent,
-    CertificatesComponent,
     GenerateResumeComponent
   ],
     imports: [
