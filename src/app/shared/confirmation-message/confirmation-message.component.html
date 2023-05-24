@@ -1,0 +1,15 @@
+<div class="dialog-container">
+  <div class="message">
+    Are you sure you want to remove all data about yourself?
+  </div>
+  <div class="buttons-container">
+    <button mat-raised-button color="primary" (click)="onCancelClick()" class="confirmation-button">
+      <mat-icon>cancel</mat-icon>
+      Close
+    </button>
+    <button mat-raised-button color="accent" (click)="onRemoveClick()" class="confirmation-button">
+      <mat-icon>delete_outline</mat-icon>
+      <span>Remove</span>
+    </button>
+  </div>
+</div>

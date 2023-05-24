@@ -22,7 +22,7 @@ import {AboutMeComponent} from './modules/about-me/about-me.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {ExperienceComponent} from './modules/experience/experience.component';
 import {EducationComponent} from './modules/education/education.component';
-import {CourcesComponent} from './modules/cources/cources.component';
+import {CoursesComponent} from './modules/courses/courses.component';
 import {GenerateResumeComponent} from './modules/generate-resume/generate-resume.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
@@ -31,6 +31,10 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {DatePipe} from "@angular/common";
+import {SkillsComponent} from './modules/skills/skills.component';
+import {PdfViewerModule} from "ng2-pdf-viewer";
+import {ConfirmationMessageComponent} from './shared/confirmation-message/confirmation-message.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -44,29 +48,33 @@ import {DatePipe} from "@angular/common";
     AboutMeComponent,
     ExperienceComponent,
     EducationComponent,
-    CourcesComponent,
-    GenerateResumeComponent
+    CoursesComponent,
+    GenerateResumeComponent,
+    SkillsComponent,
+    ConfirmationMessageComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MatIconModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatSnackBarModule,
-        BrowserAnimationsModule,
-        RecaptchaFormsModule,
-        RecaptchaModule,
-        MatTabsModule,
-        FormsModule,
-        MatInputModule,
-        MatSelectModule,
-        MatStepperModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatCheckboxModule
-    ],
+  imports: [
+    PdfViewerModule,
+    BrowserModule,
+    AppRoutingModule,
+    MatIconModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
+    RecaptchaFormsModule,
+    RecaptchaModule,
+    MatTabsModule,
+    FormsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCheckboxModule,
+    MatDialogModule,
+  ],
   providers: [
     DatePipe,
     {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true},

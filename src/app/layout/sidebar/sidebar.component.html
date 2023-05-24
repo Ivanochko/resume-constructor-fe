@@ -3,19 +3,19 @@
     <img src="assets/images/logo.png" alt="Logo" class="logo-image">
   </a>
   <div class="navigation-wrapper">
-    <div class="navigation-element">
-      <div class="element-icon">
-        <mat-icon>settings</mat-icon>
+    <div class="navigation-element" (click)="removeAllData()">
+      <div class="element-icon element-title-danger">
+        <mat-icon>delete_forever</mat-icon>
       </div>
-      <div class="element-title">
-        Settings
+      <div class="element-title element-title-danger" >
+        Remove data
       </div>
     </div>
-    <div class="navigation-element">
+    <div class="navigation-element" (click)="logout()">
       <div class="element-icon">
         <mat-icon>exit_to_app</mat-icon>
       </div>
-      <div class="element-title" (click)="logout()">
+      <div class="element-title">
         Logout
       </div>
     </div>
