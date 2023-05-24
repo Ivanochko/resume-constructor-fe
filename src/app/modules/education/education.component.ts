@@ -1,7 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EducationService} from "../../shared/services/education.service";
 import {Education} from "../../shared/models/education";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {SnackbarUtils} from "../../shared/utils/snackbar-utils";
+import {forkJoin, Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-education',
@@ -12,17 +15,26 @@ export class EducationComponent implements OnInit {
 
   @Output() next = new EventEmitter<void>();
   @Output() previous = new EventEmitter<void>();
-  @Input() formGroup!: FormGroup
+
+  formGroup!: FormGroup
 
   idsToBeDeleted: number[] = [];
+  private eventsSubscription!: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
-    private educationService: EducationService
+    private educationService: EducationService,
+    private _snackBar: MatSnackBar
   ) {
   }
 
   ngOnInit(): void {
+    if (this.eventsSubscription) {
+      this.eventsSubscription.unsubscribe();
+    }
+    this.clearForm();
+    this.initEducationForm();
+    this.formGroup.markAsPristine()
     this.educationService.getCurrentUserEducations()
       .subscribe((educations: Education[]) => {
         this.patchFormValue(educations)
@@ -67,18 +79,20 @@ export class EducationComponent implements OnInit {
 
   save() {
     let length = this.educationsFormArray.length;
+    let observables: Observable<any>[] = []
     for (let i = 0; i < length; i++) {
       let educationFormForIndex = this.getEducationFormForIndex(i);
       let value = educationFormForIndex.value;
       if (value.id) {
-        this.educationService.updateUserEducation(value).subscribe();
+        observables.push(this.educationService.updateUserEducation(value))
       } else {
-        this.educationService.saveNewUserEducation(value).subscribe();
+        observables.push(this.educationService.saveNewUserEducation(value))
       }
     }
     for (let id of this.idsToBeDeleted) {
-      this.educationService.deleteUserEducations(id).subscribe();
+      observables.push(this.educationService.deleteUserEducations(id))
     }
+    SnackbarUtils.handleObservable(forkJoin(observables), "Education", this._snackBar)
     this.formGroup.markAsPristine()
   }
 
@@ -89,6 +103,21 @@ export class EducationComponent implements OnInit {
     }
     this.educationsFormArray.removeAt(index)
     this.formGroup.markAsDirty();
+  }
+
+  private initEducationForm() {
+    let educationsFormArray = this.formBuilder.array([]);
+    this.formGroup = this.formBuilder.group({
+      educations: educationsFormArray
+    })
+  }
+
+  clearForm() {
+    if (this.formGroup) {
+      while (this.educationsFormArray.length) {
+        this.educationsFormArray.removeAt(0)
+      }
+    }
   }
 
 }

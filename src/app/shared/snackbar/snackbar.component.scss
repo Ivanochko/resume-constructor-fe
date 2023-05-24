@@ -6,19 +6,21 @@
   top: 0;
   display: flex;
   z-index: 10000;
-  background: $primary-dark;
+  background: $primary-800;
   color: $secondary-light;
   padding: 10px;
-  max-width: 500px;
+  min-width: 100%;
+  max-width: 100%;
   border-radius: 5px;
   align-items: center;
+  justify-content: space-evenly;
 
   span.actions {
     height: 100% !important;
 
     button {
       height: 100% !important;
-      background-color: $primary;
+      background-color: $primary-dark;
       color: $primary-50;
     }
   }

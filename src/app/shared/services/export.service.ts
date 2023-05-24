@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from "./http.service";
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
@@ -9,8 +8,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 export class ExportService {
   apiBaseUrl: string = "http://localhost:8080"
 
-  constructor(private httpService: HttpService,
-              private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient) {
   }
 
   export(): Observable<any> {

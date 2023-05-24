@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../shared/services/user.service";
 import {UserAllPersonalFields} from "../../shared/models/user-all-personal-fields";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {SnackbarUtils} from "../../shared/utils/snackbar-utils";
 
 @Component({
   selector: 'app-about-me',
@@ -11,12 +13,13 @@ import {UserAllPersonalFields} from "../../shared/models/user-all-personal-field
 export class AboutMeComponent implements OnInit {
 
   @Output() next = new EventEmitter<void>();
-  @Input() formGroup!: FormGroup
 
+  @Input() formGroup!: FormGroup
   user!: UserAllPersonalFields;
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService) {
+              private userService: UserService,
+              private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -42,10 +45,6 @@ export class AboutMeComponent implements OnInit {
     return this.formGroup.get('lastName') as FormControl
   }
 
-  get sex(): FormControl {
-    return this.formGroup.get('sex') as FormControl
-  }
-
   get location(): FormControl {
     return this.formGroup.get('location') as FormControl
   }
@@ -69,7 +68,7 @@ export class AboutMeComponent implements OnInit {
 
   save() {
     let value: UserAllPersonalFields = this.formGroup.value;
-    this.userService.partialUpdate(value).subscribe();
+    SnackbarUtils.handleObservable(this.userService.partialUpdate(value), "About me section", this._snackBar)
     this.formGroup.markAsPristine()
   }
 

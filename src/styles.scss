@@ -10,31 +10,6 @@ html, body {
   margin: 0;
 }
 
-.plain-button {
-  background-color: $primary;
-  border: 1px solid $primary-dark;
-  border-radius: 5px;
-  color: $primary-50;
-  padding: 6px 12px;
-  cursor: pointer;
-  transition: all 0.5s ease-in;
-
-  &:disabled {
-    background-color: $secondary;
-    cursor: not-allowed;
-    box-shadow: none !important;
-
-    &:hover {
-      background-color: $secondary;
-    }
-  }
-
-  &:hover {
-    background-color: $primary;
-    box-shadow: 2px 2px 7px rgba(57, 57, 57, 0.68);
-  }
-}
-
 .text-button {
   background: none;
   color: $primary-dark;
@@ -56,7 +31,6 @@ div.cdk-global-overlay-wrapper {
   top: 0;
   left: 0;
   height: 90%;
-  width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -109,8 +83,8 @@ div.buttons-container {
   }
 }
 
-.mat-form-field-appearance-outline .mat-form-field-outline {
-  color: $secondary-dark !important;
+.mat-form-field-appearance-outline .mat-form-field-outline:not(.mat-form-field-invalid) {
+  color: $dark !important;
 }
 
 .mat-input-element {
@@ -120,3 +94,50 @@ div.buttons-container {
 div.mat-form-field-infix {
   padding: 12px 0 !important;
 }
+
+.mat-step-header .mat-step-icon {
+  background-color: $primary-dark !important;
+  color: #fff;
+  box-shadow: $default-shadow;
+}
+
+.mat-raised-button.mat-primary:not(.mat-button-disabled), .mat-flat-button.mat-primary:not(.mat-button-disabled) {
+  background-color: $primary !important
+}
+
+.mat-stroked-button.mat-primary, .mat-button.mat-primary {
+  color: $primary-dark !important
+}
+
+.mat-input-element, .mat-form-field-label {
+  color: $dark-half-transparent !important;
+}
+
+.mat-form-field-required-marker  {
+  color: $invalid !important;
+}
+
+.mat-raised-button.mat-accent:not(.mat-button-disabled), .mat-flat-button.mat-accent:not(.mat-button-disabled) {
+  background-color: $secondary-dark !important
+}
+
+.mat-form-field-type-mat-native-select.mat-focused:not(.mat-form-field-invalid).mat-warn .mat-form-field-infix::after {
+  color: $secondary-dark
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: $invalid !important;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-label.mat-accent, .mat-form-field.mat-form-field-invalid .mat-form-field-label .mat-form-field-required-marker {
+  color: $invalid !important;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-ripple, .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
+  background-color: $invalid !important;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+  color: $invalid !important;
+}
+

@@ -502,11 +502,13 @@ input.mat-input-element {
 }
 
 .mat-simple-snackbar {
+  width: 100%;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 14px
 }
 
 .mat-simple-snackbar-action {
+  width: 100%;
   line-height: 1;
   font-family: inherit;
   font-size: inherit;
@@ -573,7 +575,7 @@ input.mat-input-element {
   top: 0;
   left: 0;
   height: 100%;
-  width: 100%
+  //width: 100%
 }
 
 .cdk-overlay-container {
@@ -589,6 +591,16 @@ input.mat-input-element {
   display: flex;
   position: absolute;
   z-index: 1000
+}
+
+.cdk-overlay-pane {
+  position: absolute;
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 1000;
+  display: flex;
+  max-width: 100%;
+  max-height: 100%
 }
 
 .cdk-overlay-pane {
@@ -2392,7 +2404,8 @@ mat-row, mat-header-row, mat-footer-row, th.mat-header-cell, td.mat-cell, td.mat
 
 .mat-step-header .mat-step-icon {
   background-color: #1a1818 !important;
-  color: #fff
+  color: #fff;
+  box-shadow: 1px 1px 5px black !important;
 }
 
 .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
@@ -2691,7 +2704,7 @@ mat-row, mat-header-row, mat-footer-row, th.mat-header-cell, td.mat-cell, td.mat
 
 .mat-snack-bar-container {
   color: rgba(255, 255, 255, .7);
-  background: #323232;
+  background: $primary-dark;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12)
 }
 

@@ -1,9 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DateAdapter} from "@angular/material/core";
 import {WorksService} from "../../shared/services/works.service";
 import {WorkData} from "../../shared/models/work-data";
 import {DatePipe} from "@angular/common";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {SnackbarUtils} from "../../shared/utils/snackbar-utils";
+import {forkJoin, Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-experience',
@@ -14,25 +17,41 @@ export class ExperienceComponent implements OnInit {
 
   @Output() next = new EventEmitter<void>();
   @Output() previous = new EventEmitter<void>();
-  @Input() formGroup!: FormGroup
+
+  formGroup!: FormGroup
 
   idsToBeDeleted: number[] = [];
+  private eventsSubscription!: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
     private worksService: WorksService,
     private dateAdapter: DateAdapter<Date>,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private _snackBar: MatSnackBar
   ) {
     this.dateAdapter.setLocale('en-GB')
   }
 
   ngOnInit(): void {
+    if (this.eventsSubscription) {
+      this.eventsSubscription.unsubscribe();
+    }
+    this.clearForm();
+    this.initExperienceForm();
+    this.formGroup.markAsPristine()
     this.worksService.getCurrentUserWorks()
       .subscribe((works: WorkData[]) => {
           this.patchFormValue(works)
         }
       )
+  }
+
+  private initExperienceForm() {
+    let worksFormArray = this.formBuilder.array([]);
+    this.formGroup = this.formBuilder.group({
+      works: worksFormArray
+    })
   }
 
   patchFormValue(works: WorkData[]) {
@@ -76,19 +95,32 @@ export class ExperienceComponent implements OnInit {
 
   save() {
     let length = this.worksFormArray.length;
+    let observables: Observable<any>[] = []
     for (let i = 0; i < length; i++) {
       let workFormForIndex = this.getWorkFormForIndex(i);
       let value = workFormForIndex.value;
       if (value.id) {
-        this.worksService.updateUserWork(value).subscribe();
+        observables.push(this.worksService.updateUserWork(value))
       } else {
-        this.worksService.saveNewUserWork(value).subscribe();
+        observables.push(this.worksService.saveNewUserWork(value))
       }
     }
     for (let id of this.idsToBeDeleted) {
-      this.worksService.deleteUserWork(id).subscribe();
+      observables.push(this.worksService.deleteUserWork(id))
     }
-    this.formGroup.markAsPristine()
+    this.eventsSubscription = SnackbarUtils.handleObservable(forkJoin(observables), "Experience", this._snackBar)
+      .subscribe(() => {
+          this.ngOnInit();
+        }
+      )
+  }
+
+  clearForm() {
+    if (this.formGroup) {
+      while (this.worksFormArray.length) {
+        this.worksFormArray.removeAt(0)
+      }
+    }
   }
 
   deleteWork(index: number) {

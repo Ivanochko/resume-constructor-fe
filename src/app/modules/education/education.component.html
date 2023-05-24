@@ -1,14 +1,14 @@
-<div [formGroup]="formGroup" class="content-container">
+<div *ngIf="formGroup" [formGroup]="formGroup" class="content-container">
   <div class="content-header">
     <div class="header-title">
       Education
     </div>
     <div class="buttons-container">
-      <button mat-raised-button color="primary" (click)="save()" [disabled]="formGroup.invalid || !formGroup.dirty">
-        Save
-      </button>
       <button mat-raised-button color="primary" (click)="previousStep()">Previous</button>
       <button mat-raised-button color="primary" (click)="nextStep()">Next</button>
+      <button mat-raised-button color="accent" (click)="save()" [disabled]="formGroup.invalid || !formGroup.dirty">
+        Save
+      </button>
     </div>
   </div>
   <div>
@@ -18,20 +18,20 @@
       </div>
       <div *ngFor="let education of educationsFormArray.controls; let index = index"
            [formGroupName]="index"
-           class="education-form-array">
+           class="form-array form-container">
         <div class="education-inputs-container">
           <div>
-            <mat-form-field class="education-form-field" appearance="outline">
+            <mat-form-field class="form-field" appearance="outline">
               <mat-label>Title</mat-label>
               <input matInput type="text" formControlName="title">
             </mat-form-field>
-            <mat-form-field class="education-form-field" appearance="outline">
+            <mat-form-field class="form-field" appearance="outline">
               <mat-label>Degree</mat-label>
               <input matInput type="text" formControlName="degree">
             </mat-form-field>
           </div>
           <div>
-            <mat-form-field class="education-form-field" appearance="outline">
+            <mat-form-field class="form-field" appearance="outline">
               <mat-label>Year of Graduation</mat-label>
               <input matInput
                      type="number"
@@ -39,14 +39,14 @@
                      min="1950"
                      max="2100">
             </mat-form-field>
-            <mat-form-field class="education-form-field" appearance="outline">
+            <mat-form-field class="form-field" appearance="outline">
               <mat-label>Place of Graduation</mat-label>
               <input matInput type="text" formControlName="placeOfGraduation">
             </mat-form-field>
           </div>
         </div>
         <div class="education-actions-container">
-          <div class="delete-education" (click)="deleteEducation(index)">
+          <div class="delete-button" (click)="deleteEducation(index)">
             <mat-icon>delete_outline</mat-icon>
           </div>
         </div>

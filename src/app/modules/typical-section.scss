@@ -33,3 +33,44 @@ div.content-container {
 .add-new-array-element {
   font-size: 1em;
 }
+
+.form-container {
+  width: 550px;
+  border: 1.5px solid #b2b2b2;
+  border-radius: 5px;
+  padding: 20px 10px 0 10px;
+  box-shadow: $default-shadow;
+}
+
+.form-array {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.form-field {
+  width: 240px !important;
+  min-width: 240px !important;
+  max-width: 240px !important;
+  margin-right: 10px;
+
+  &:nth-of-type(2n - 1) {
+    margin-left: 10px;
+  }
+}
+
+.delete-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: $invalid;
+  margin-bottom: 35%;
+  box-sizing: border-box;
+}
+
+

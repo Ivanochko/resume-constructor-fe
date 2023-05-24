@@ -63,12 +63,12 @@ export class LoginComponent implements OnInit {
       this.authService.login(value)
         .subscribe(
           (session) => {
-            this.successfulLogin(session)
+            this.successfulLogin(session);
           },
           (error) => {
-            this.errorOnLogin(error)
+            this.errorOnLogin(error);
           }
-        )
+        );
     }
   }
 

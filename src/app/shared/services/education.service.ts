@@ -8,23 +8,25 @@ import {Education} from "../models/education";
 })
 export class EducationService {
 
+  educationsUrl = "/users/educations";
+
   constructor(private httpService: HttpService) {
   }
 
   getCurrentUserEducations(): Observable<Education[]> {
-    return this.httpService.get("/users/educations");
+    return this.httpService.get(this.educationsUrl);
   }
 
   saveNewUserEducation(education: Education): Observable<Education> {
-    return this.httpService.post("/users/educations", education);
+    return this.httpService.post(this.educationsUrl, education);
   }
 
   updateUserEducation(education: Education): Observable<Education> {
-    return this.httpService.put("/users/educations", education);
+    return this.httpService.put(this.educationsUrl, education);
   }
 
   deleteUserEducations(id: number): Observable<void> {
-    return this.httpService.delete(`/users/educations/${id}`);
+    return this.httpService.delete(this.educationsUrl + `/${id}`);
   }
 
 }
