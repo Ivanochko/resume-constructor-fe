@@ -1,0 +1,56 @@
+<div *ngIf="formGroup" [formGroup]="formGroup" class="content-container">
+  <div class="content-header">
+    <div class="header-title">
+      Course
+    </div>
+    <div class="buttons-container">
+      <button mat-raised-button color="primary" (click)="previousStep()">Previous</button>
+      <button mat-raised-button color="primary" (click)="nextStep()">Next</button>
+      <button mat-raised-button color="accent" (click)="save()" [disabled]="formGroup.invalid || !formGroup.dirty">
+        Save
+      </button>
+    </div>
+  </div>
+  <div>
+    <div formArrayName="courses">
+      <div *ngIf="coursesFormArray.controls.length == 0">
+        There are no date about course, please click the button below to add new information.
+      </div>
+      <div *ngFor="let course of coursesFormArray.controls; let index = index"
+           [formGroupName]="index"
+           class="form-array form-container">
+        <div class="course-inputs-container">
+          <div>
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>Title</mat-label>
+              <input matInput type="text" formControlName="title">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>Year of Completion</mat-label>
+              <input matInput
+                     type="number"
+                     formControlName="yearOfCompletion"
+                     min="1950"
+                     max="2100">
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>Place of Learning</mat-label>
+              <input matInput type="text" formControlName="placeOfLearning">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="course-actions-container">
+          <div class="delete-button" (click)="deleteCourse(index)">
+            <mat-icon>delete_outline</mat-icon>
+          </div>
+        </div>
+      </div>
+      <button class="text-button add-new-array-element" (click)="addNewCourse()">
+        Add new course information
+      </button>
+    </div>
+  </div>
+</div>
+

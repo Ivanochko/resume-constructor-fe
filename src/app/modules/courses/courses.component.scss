@@ -1,0 +1,15 @@
+@import "src/app/shared/colors";
+
+.course-actions-container {
+  width: 100%;
+}
+
+.course-inputs-container {
+  display: flex;
+  flex-direction: column;
+
+  div {
+    display: flex;
+    flex-direction: row;
+  }
+}
