@@ -1,4 +1,4 @@
-<mat-stepper #stepper  [@.disabled]="true">
+<mat-stepper #stepper [@.disabled]="true" (selectionChange)="selectionChange($event)">
   <mat-step [stepControl]="aboutMeFormGroup">
     <ng-template matStepLabel>About me</ng-template>
     <app-about-me [formGroup]="aboutMeFormGroup"
@@ -7,28 +7,33 @@
   </mat-step>
   <mat-step [stepControl]="aboutMeFormGroup">
     <ng-template matStepLabel>Experience</ng-template>
-    <app-experience [formGroup]="experienceFormGroup"
-                    (previous)=previous()
+    <app-experience (previous)=previous()
                     (next)="next()">
     </app-experience>
   </mat-step>
   <mat-step [stepControl]="aboutMeFormGroup">
+    <ng-template matStepLabel>Skills</ng-template>
+    <app-skills (previous)=previous()
+                (next)="next()">
+    </app-skills>
+  </mat-step>
+  <mat-step [stepControl]="aboutMeFormGroup">
     <ng-template matStepLabel>Education</ng-template>
-    <app-education [formGroup]="educationFormGroup"
-                   (previous)=previous()
+    <app-education (previous)=previous()
                    (next)="next()">
     </app-education>
   </mat-step>
-<!--  <mat-step [stepControl]="aboutMeFormGroup">-->
-<!--    <ng-template matStepLabel>Courses</ng-template>-->
-<!--    <app-cources></app-cources>-->
-<!--  </mat-step>-->
-<!--  <mat-step [stepControl]="aboutMeFormGroup">-->
-<!--    <ng-template matStepLabel>Certifications</ng-template>-->
-<!--    <app-certificates></app-certificates>-->
-<!--  </mat-step>-->
+  <mat-step [stepControl]="aboutMeFormGroup">
+    <ng-template matStepLabel>Courses</ng-template>
+    <app-courses (previous)=previous()
+                 (next)="next()">
+    </app-courses>
+  </mat-step>
   <mat-step [stepControl]="aboutMeFormGroup">
     <ng-template matStepLabel>Generate resume</ng-template>
-    <app-generate-resume></app-generate-resume>
+    <app-generate-resume [refreshEvent]="refreshEventSubject.asObservable()"
+                         (previous)=previous()
+    >
+    </app-generate-resume>
   </mat-step>
 </mat-stepper>

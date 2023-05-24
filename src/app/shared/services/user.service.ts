@@ -9,19 +9,25 @@ import {UserAllData} from "../models/user-all-data";
 })
 export class UserService {
 
+  private usersUrl = "/users"
+
   constructor(private httpService: HttpService) {
   }
 
   partialUpdate(userAllFields: UserAllPersonalFields): Observable<void> {
-    return this.httpService.patch("/users/partialUpdate", userAllFields);
+    return this.httpService.patch(`${this.usersUrl}/partialUpdate`, userAllFields);
   }
 
   getCurrentUser(): Observable<UserAllPersonalFields> {
-    return this.httpService.get("/users/current");
+    return this.httpService.get(`${this.usersUrl}/current`);
   }
 
   getAllDataOfCurrentUser(): Observable<UserAllData> {
-    return this.httpService.get("/users/allData")
+    return this.httpService.get(`${this.usersUrl}/allData`)
+  }
+
+  removeAllDataAboutCurrentUser(): Observable<UserAllData> {
+    return this.httpService.get(`${this.usersUrl}/removeAll`)
   }
 
 }

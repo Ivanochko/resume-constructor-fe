@@ -1,93 +1,10 @@
 @import "src/app/shared/colors";
 
-.cv-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  background: #effaff;
-  height: 841.89px;
-  width: 595.28px;
-  font-size: 12px;
-  font-family: Arial serif;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
-
-  .cv-left-part, .cv-right-part {
-    height: 95%;
-    box-sizing: border-box;
-  }
-
-  .cv-left-part {
-    width: 55%;
-    padding-left: 7px;
-    padding-right: 5px;
-    background-color: #ffffff;
-  }
-
-  .cv-right-part {
-    width: 40%;
-    padding-right: 7px;
-  }
-
+#content-container-resume {
+  width: 850px;
 }
 
-.name {
-  color: $primary-dark;
-  font-size: 28px;
-  font-weight: 600;
-  margin: 5px 0;
-}
-
-.title {
-  color: $primary-dark;
-  font-size: 16px;
-  margin-left: 10px;
-}
-
-.cv-section {
-  margin-bottom: 15px;
-
-  .cv-section-header {
-    margin-bottom: 5px;
-    margin-left: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    color: $primary-dark;
-  }
-
-  .cv-section-content {
-    font-size: 14px;
-
-  }
-
-}
-
-.contacts {
-  margin: 2px;
-
-  &::before {
-    content: "○";
-  }
-
-  .contacts-label {
-    margin-left: 5px;
-    font-weight: 500;
-  }
-
-  .contacts-value {
-    font-style: italic;
-  }
-}
-
-.job, .education {
-  margin-bottom: 5px;
-
-  .job-title, .education-title {
-    font-size: 16px;
-    font-weight: bolder;
-
-    &::before {
-      content: "○";
-    }
-  }
+.pdf-viewer {
+  width: 850px;
+  height: 650px;
 }

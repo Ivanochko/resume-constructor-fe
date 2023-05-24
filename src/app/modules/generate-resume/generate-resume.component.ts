@@ -1,18 +1,25 @@
-import {Component, ElementRef, OnInit, ViewChildren} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {UserService} from "../../shared/services/user.service";
-import {UserAllData} from "../../shared/models/user-all-data";
 import {ExportService} from "../../shared/services/export.service";
+import {Observable, Subscription} from "rxjs";
+import {UserAllPersonalFields} from "../../shared/models/user-all-personal-fields";
 
 @Component({
   selector: 'app-generate-resume',
   templateUrl: './generate-resume.component.html',
   styleUrls: ['./generate-resume.component.scss', '../typical-section.scss']
 })
-export class GenerateResumeComponent implements OnInit {
+export class GenerateResumeComponent implements OnInit, OnDestroy {
 
-  userAllData!: UserAllData
+  userData!: UserAllPersonalFields
   blob?: Blob
-  @ViewChildren('cv-container') content!: ElementRef;
+  url: string | undefined
+
+  private eventsSubscription!: Subscription;
+  private dataRefreshed: boolean = false;
+
+  @Input() refreshEvent!: Observable<void>;
+  @Output() previous = new EventEmitter<void>();
 
   constructor(
     private userService: UserService,
@@ -21,31 +28,33 @@ export class GenerateResumeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getAllDataOfCurrentUser()
-      .subscribe(userAllData => {
-        this.userAllData = userAllData;
-      })
+    this.userService.getCurrentUser()
+      .subscribe(userData => {
+        this.userData = userData;
+      });
+    this.exportService.export().subscribe(data => {
+      this.blob = new Blob([data], {type: 'application/pdf'});
+      this.url = window.URL.createObjectURL(data);
+    });
+    this.eventsSubscription = this.refreshEvent.subscribe(() => {
+      this.ngOnInit()
+    });
   }
 
-  refreshData() {
-    this.ngOnInit();
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
+
+  previousStep() {
+    this.dataRefreshed = false
+    this.previous.emit();
   }
 
   download() {
-    this.exportService.export().subscribe(data => {
-      this.blob = new Blob([data], {type: 'application/pdf'});
-
-      let downloadURL = window.URL.createObjectURL(data);
-      let link = document.createElement('a');
-      link.href = downloadURL;
-      link.download = this.userAllData.firstName + "_" + this.userAllData.lastName + ".pdf";
-      link.click();
-    })
-  }
-
-  formatDateFromApi(date: string): string {
-    let numbers = date.split("-");
-    return numbers[2] + "." + numbers[1] + "." + numbers[0];
+    let link = document.createElement('a');
+    link.href = this.url!;
+    link.download = this.userData.firstName + "_" + this.userData.lastName + ".pdf";
+    link.click();
   }
 
 }

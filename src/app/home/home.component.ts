@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Subject} from "rxjs";
+import {StepperSelectionEvent} from "@angular/cdk/stepper";
 
 @Component({
   selector: 'app-home',
@@ -11,18 +13,15 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('stepper', {static: true}) tab: any;
 
+  refreshEventSubject: Subject<void> = new Subject<void>();
   aboutMeFormGroup!: FormGroup
-  experienceFormGroup!: FormGroup
-  educationFormGroup!: FormGroup
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,) {
   }
 
   ngOnInit(): void {
-    this.initAboutMeForm()
-    this.initExperienceForm()
-    this.initEducationForm()
+    this.initAboutMeForm();
   }
 
   next() {
@@ -49,17 +48,9 @@ export class HomeComponent implements OnInit {
     (this.aboutMeFormGroup.get('email') as FormControl).disable({onlySelf: true});
   }
 
-  private initExperienceForm() {
-    let worksFormArray = this.formBuilder.array([]);
-    this.experienceFormGroup = this.formBuilder.group({
-      works: worksFormArray
-    })
+  selectionChange(event: StepperSelectionEvent) {
+    if (event.selectedIndex === 5) {
+      this.refreshEventSubject.next();
+    }
   }
-  private initEducationForm() {
-    let educationsFormArray = this.formBuilder.array([]);
-    this.educationFormGroup = this.formBuilder.group({
-      educations: educationsFormArray
-    })
-  }
-
 }
