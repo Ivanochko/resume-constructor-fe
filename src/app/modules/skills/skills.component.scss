@@ -1,0 +1,30 @@
+@import "src/app/shared/colors";
+
+.skill-actions-container {
+  width: 100%;
+  height: 100%;
+}
+
+.skill-level-form-field {
+  margin-left: 0 !important;
+}
+
+.skill-inputs-container {
+  display: flex;
+  flex-direction: row;
+
+  div {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.skills-form-array {
+  height: 81px;
+}
+
+.delete-skill {
+  align-items: start !important;
+  box-sizing: border-box;
+  padding-bottom: 15px;
+}
