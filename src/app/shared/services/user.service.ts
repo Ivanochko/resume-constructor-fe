@@ -27,7 +27,7 @@ export class UserService {
   }
 
   removeAllDataAboutCurrentUser(): Observable<UserAllData> {
-    return this.httpService.get(`${this.usersUrl}/removeAll`)
+    return this.httpService.delete(`${this.usersUrl}/removeAll`)
   }
 
 }
